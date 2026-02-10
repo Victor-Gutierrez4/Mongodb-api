@@ -1,0 +1,260 @@
+[{
+  "_id": {
+    "$oid": "698a464907b2c39b15fc4322"
+  },
+  "name": "Tree House Brewing Company",
+  "brewery_type": "micro",
+  "city": "Charlton",
+  "state": "Massachusetts",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4323"
+  },
+  "name": "Russian River Brewing Company",
+  "brewery_type": "regional",
+  "city": "Santa Rosa",
+  "state": "California",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4324"
+  },
+  "name": "Sierra Nevada Brewing Co.",
+  "brewery_type": "regional",
+  "city": "Chico",
+  "state": "California",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4325"
+  },
+  "name": "Dogfish Head Craft Brewery",
+  "brewery_type": "regional",
+  "city": "Milton",
+  "state": "Delaware",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4326"
+  },
+  "name": "Lagunitas Brewing Company",
+  "brewery_type": "regional",
+  "city": "Petaluma",
+  "state": "California",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4327"
+  },
+  "name": "Stone Brewing",
+  "brewery_type": "regional",
+  "city": "Escondido",
+  "state": "California",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4328"
+  },
+  "name": "Bell's Brewery",
+  "brewery_type": "regional",
+  "city": "Kalamazoo",
+  "state": "Michigan",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4329"
+  },
+  "name": "Founders Brewing Co.",
+  "brewery_type": "regional",
+  "city": "Grand Rapids",
+  "state": "Michigan",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc432a"
+  },
+  "name": "New Belgium Brewing",
+  "brewery_type": "regional",
+  "city": "Fort Collins",
+  "state": "Colorado",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc432b"
+  },
+  "name": "Goose Island Beer Co.",
+  "brewery_type": "regional",
+  "city": "Chicago",
+  "state": "Illinois",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc432c"
+  },
+  "name": "Brooklyn Brewery",
+  "brewery_type": "regional",
+  "city": "Brooklyn",
+  "state": "New York",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc432d"
+  },
+  "name": "Deschutes Brewery",
+  "brewery_type": "regional",
+  "city": "Bend",
+  "state": "Oregon",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc432e"
+  },
+  "name": "Anchor Brewing",
+  "brewery_type": "regional",
+  "city": "San Francisco",
+  "state": "California",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc432f"
+  },
+  "name": "Firestone Walker Brewing Company",
+  "brewery_type": "regional",
+  "city": "Paso Robles",
+  "state": "California",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4330"
+  },
+  "name": "Samuel Adams Brewery",
+  "brewery_type": "regional",
+  "city": "Boston",
+  "state": "Massachusetts",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4331"
+  },
+  "name": "Alchemist Brewery",
+  "brewery_type": "micro",
+  "city": "Stowe",
+  "state": "Vermont",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4332"
+  },
+  "name": "Odell Brewing Company",
+  "brewery_type": "regional",
+  "city": "Fort Collins",
+  "state": "Colorado",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4333"
+  },
+  "name": "Surly Brewing Co.",
+  "brewery_type": "regional",
+  "city": "Minneapolis",
+  "state": "Minnesota",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4334"
+  },
+  "name": "Victory Brewing Company",
+  "brewery_type": "regional",
+  "city": "Downingtown",
+  "state": "Pennsylvania",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "698a464a07b2c39b15fc4335"
+  },
+  "name": "Great Lakes Brewing Company",
+  "brewery_type": "regional",
+  "city": "Cleveland",
+  "state": "Ohio",
+  "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0",
+  "lastUpdated": {
+    "$date": "2026-02-09T23:00:00.000Z"
+  }
+}]
