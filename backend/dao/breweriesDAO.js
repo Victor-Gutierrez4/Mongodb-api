@@ -1,34 +1,54 @@
-let breweries; // holds the collection
+let breweriesComments
 
 export default class BreweriesDAO {
+
   static async injectDB(conn) {
-    if (breweries) return;
+    if (breweriesComments) return
     try {
-      breweries = await conn.db("it302").collection("breweries_vag"); // database & collection names
-      console.log("BreweriesDAO: Connected to MongoDB collection");
+      breweriesComments = await conn.db(process.env.DB_NAME).collection("comments")
     } catch (e) {
-      console.error(`Unable to connect to collection: ${e}`);
+      console.error(`Unable to establish collection handles: ${e}`)
     }
   }
 
-  static async getBreweries({ filters = null, page = 0, breweriesPerPage = 10 } = {}) {
-    let query = {};
-    if (filters && "name" in filters) {
-      query.name = { $regex: filters["name"], $options: "i" };
-    }
-
+  static async addComment(breweryId, text, userName, userId, date) {
     try {
-      const cursor = await breweries.find(query)
-        .limit(breweriesPerPage)
-        .skip(breweriesPerPage * page);
-
-      const breweriesList = await cursor.toArray();
-      const totalNumBreweries = await breweries.countDocuments(query);
-
-      return { breweriesList, totalNumBreweries };
+      const commentDoc = {
+        breweryId,
+        text,
+        userName,
+        userId,
+        lastModified: date
+      }
+      return await breweriesComments.insertOne(commentDoc)
     } catch (e) {
-      console.error(`Unable to query breweries: ${e}`);
-      return { breweriesList: [], totalNumBreweries: 0 };
+      console.error(`Unable to post comment: ${e}`)
+      return { error: e }
     }
   }
+
+  static async updateComment(commentId, userId, text, date) {
+    try {
+      return await breweriesComments.updateOne(
+        { _id: commentId, userId },
+        { $set: { text, lastModified: date } }
+      )
+    } catch (e) {
+      console.error(`Unable to update comment: ${e}`)
+      return { error: e }
+    }
+  }
+
+static async deleteComment(commentId, userId) {
+  try {
+    return await breweriesComments.deleteOne({
+      _id: commentId,
+      userId: userId
+    })
+  } catch (e) {
+    console.error(`Unable to delete comment: ${e}`)
+    // always include deletedCount so controller can check it
+    return { deletedCount: 0, error: e }
+  }
+}
 }

@@ -1,9 +1,13 @@
-import express from "express";
-import BreweriesController from "./breweries.controller.js";
+import express from "express"
+import BreweriesCtrl from "./breweries.controller.js"
 
-const router = express.Router();
+const router = express.Router()
 
-// GET /api/v1/vag/breweries
-router.get("/", BreweriesController.apiGetBreweries);
+// Routes for comments on breweries
+router
+  .route("/comments")
+  .post(BreweriesCtrl.apiPostComment)
+  .put(BreweriesCtrl.apiUpdateComment)
+  .delete(BreweriesCtrl.apiDeleteComment)
 
-export default router;
+export default router
