@@ -32,22 +32,15 @@ export default class BreweriesController {
     }
   }
 
-static async apiDeleteComment(req, res) {
-  try {
-    const commentId = new mongodb.ObjectId(req.body.commentId)
-    const userId = req.body.userId
+  static async apiDeleteComment(req, res) {
+    try {
+      const commentId = new mongodb.ObjectId(req.body.commentId)
+      const userId = req.body.userId
 
-    const result = await BreweriesDAO.deleteComment(commentId, userId)
-
-    // ✅ CHECK if anything was actually deleted
-    if (result.deletedCount === 1) {
-      res.status(200).json({ status: "success" })
-    } else {
-      res.status(404).json({ error: "Comment not found or already deleted" })
+      await BreweriesDAO.deleteComment(commentId, userId)
+      res.json({ status: "success" })
+    } catch (e) {
+      res.status(500).json({ error: e.message })
     }
-
-  } catch (e) {
-    res.status(500).json({ error: e.message })
   }
-}
 }

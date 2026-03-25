@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-import BreweriesDAO from "./dao/BreweriesDAO.js";
+import BreweriesDAO from "./dao/breweriesDAO.js";
 import breweriesRoutes from "./api/breweries.route.js";
 
 dotenv.config();
