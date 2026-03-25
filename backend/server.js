@@ -7,6 +7,7 @@ import breweriesRoutes from "./api/breweries.route.js";
 
 dotenv.config();
 
+const mongoUrl = process.env.DB_URI;
 const app = express();
 app.use(cors());
 app.use(express.json());
