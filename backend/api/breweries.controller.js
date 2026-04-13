@@ -3,6 +3,40 @@ import mongodb from "mongodb"
 
 export default class BreweriesController {
 
+  // ✅ GET ALL + SEARCH
+  static async apiGetBreweries(req, res) {
+    try {
+      const name = req.query.name
+
+      let breweries
+      if (name) {
+        breweries = await BreweriesDAO.getBreweriesByName(name)
+      } else {
+        breweries = await BreweriesDAO.getBreweries()
+      }
+
+      res.json(breweries)
+    } catch (e) {
+      res.status(500).json({ error: e.message })
+    }
+  }
+
+  // ✅ GET ONE BY ID
+  static async apiGetBreweryById(req, res) {
+    try {
+      const breweryId = req.params.id
+      const brewery = await BreweriesDAO.getBreweryByID(breweryId)
+
+      res.json(brewery)
+    } catch (e) {
+      res.status(500).json({ error: e.message })
+    }
+  }
+
+  // =========================
+  // COMMENTS (your original code)
+  // =========================
+
   static async apiPostComment(req, res) {
     try {
       const breweryId = req.body.breweryId

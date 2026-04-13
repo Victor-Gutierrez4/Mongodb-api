@@ -1,9 +1,3 @@
-// Name: Victor Gutierrez
-// Course: IT-302
-// Assignment: Phase 3 Backend
-// Date: 3/24/26
-// Email: vag@njit.edu
-
 import express from "express"
 import cors from "cors"
 import mongodb from "mongodb"
@@ -19,17 +13,20 @@ app.use(cors())
 app.use(express.json())
 
 const MongoClient = mongodb.MongoClient
-const port = process.env.PORT || 8000
+const port = process.env.PORT || 5000
 
-// Use brewery routes
-app.use("/api/v1/breweries", breweriesRoutes)
+// ✅ FIXED ROUTE (MUST include UCID "vag")
+app.use("/api/v1/vag/breweries", breweriesRoutes)
 
-// Catch-all for 404
+// Catch-all for invalid routes
 app.use((req, res) => res.status(404).json({ error: "Not found" }))
+
 // Connect to MongoDB and start server
 MongoClient.connect(process.env.MONGO_URI, {})
   .then(async client => {
     await BreweriesDAO.injectDB(client)
+    console.log("Connected to MongoDB")
+
     app.listen(port, () => {
       console.log(`Server running on port ${port}`)
     })

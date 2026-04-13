@@ -1,54 +1,71 @@
-let breweriesComments
+let breweries
 
 export default class BreweriesDAO {
 
   static async injectDB(conn) {
-    if (breweriesComments) return
+    if (breweries) return
+
     try {
-      breweriesComments = await conn.db(process.env.DB_NAME).collection("comments")
+      breweries = await conn
+        .db(process.env.DB_NAME)
+        .collection(process.env.COLLECTION_NAME)
     } catch (e) {
-      console.error(`Unable to establish collection handles: ${e}`)
+      console.error(`Unable to connect: ${e}`)
     }
   }
 
-  static async addComment(breweryId, text, userName, userId, date) {
+  // ✅ GET ALL BREWERIES
+  static async getBreweries() {
     try {
-      const commentDoc = {
-        breweryId,
-        text,
-        userName,
-        userId,
-        lastModified: date
-      }
-      return await breweriesComments.insertOne(commentDoc)
+      return await breweries.find({}).toArray()
     } catch (e) {
-      console.error(`Unable to post comment: ${e}`)
-      return { error: e }
+      console.error(e)
+      return []
     }
+  }
+
+  // ✅ SEARCH BY NAME
+  static async getBreweriesByName(name) {
+    try {
+      return await breweries.find({
+        name: { $regex: name, $options: "i" }
+      }).toArray()
+    } catch (e) {
+      console.error(e)
+      return []
+    }
+  }
+
+  // ✅ GET BY ID
+  static async getBreweryByID(id) {
+    try {
+      return await breweries.findOne({ _id: new ObjectId(id) })
+    } catch (e) {
+      console.error(e)
+      return null
+    }
+  }
+
+  // ================= COMMENTS (keep yours) =================
+
+  static async addComment(breweryId, text, userName, userId, date) {
+    return breweries.insertOne({
+      breweryId,
+      text,
+      userName,
+      userId,
+      lastModified: date
+    })
   }
 
   static async updateComment(commentId, userId, text, date) {
-    try {
-      return await breweriesComments.updateOne(
-        { _id: commentId, userId },
-        { $set: { text, lastModified: date } }
-      )
-    } catch (e) {
-      console.error(`Unable to update comment: ${e}`)
-      return { error: e }
-    }
+    return breweries.updateOne(
+      { _id: commentId, userId },
+      { $set: { text, lastModified: date } }
+    )
   }
 
-static async deleteComment(commentId, userId) {
-  try {
-    return await breweriesComments.deleteOne({
-      _id: commentId,
-      userId: userId
-    })
-  } catch (e) {
-    console.error(`Unable to delete comment: ${e}`)
-    // always include deletedCount so controller can check it
-    return { deletedCount: 0, error: e }
+  static async deleteComment(commentId, userId) {
+    return breweries.deleteOne({ _id: commentId, userId })
   }
-}
 }

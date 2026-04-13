@@ -6,22 +6,27 @@ import BreweriesDAO from "./dao/breweriesDAO.js";
 import breweriesRoutes from "./api/breweries.route.js";
 
 dotenv.config();
+console.log("MONGO_URI:", process.env.MONGO_URI);
 
-const mongoUrl = process.env.DB_URI;
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const port = process.env.PORT || 5000;
 
-// Root route
+// ✅ USE YOUR UCID HERE (vag)
 app.use("/api/v1/vag/breweries", breweriesRoutes);
 
 async function start() {
   try {
-    const client = new MongoClient(process.env.MONGODB_URI || "mongodb://localhost:27017/");
+    // ✅ USE ONLY ENV VARIABLE (NO LOCAL FALLBACK)
+    const client = new MongoClient(process.env.MONGO_URI);
+
     await client.connect();
+    console.log("Connected to MongoDB");
+
     await BreweriesDAO.injectDB(client);
+
     app.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });
