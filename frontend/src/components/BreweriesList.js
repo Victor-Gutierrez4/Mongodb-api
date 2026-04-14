@@ -3,25 +3,20 @@ import axios from "axios"
 import { Link } from "react-router-dom"
 
 export default function BreweriesList() {
-
   const [breweries, setBreweries] = useState([])
   const [search, setSearch] = useState("")
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000"
 
-  // GET ALL BREWERIES
   const getBreweries = async () => {
     try {
-      const res = await axios.get(
-        `${backendUrl}/api/v1/vag/breweries`
-      )
+      const res = await axios.get(`${backendUrl}/api/v1/vag/breweries`)
       setBreweries(res.data)
     } catch (err) {
-      console.log(err)
+      console.log("GET ERROR:", err)
     }
   }
 
-  // SEARCH BREWERIES
   const searchBreweries = async () => {
     try {
       const res = await axios.get(
@@ -29,7 +24,7 @@ export default function BreweriesList() {
       )
       setBreweries(res.data)
     } catch (err) {
-      console.log(err)
+      console.log("SEARCH ERROR:", err)
     }
   }
 
@@ -41,7 +36,6 @@ export default function BreweriesList() {
     <div style={{ padding: "20px" }}>
       <h1>Breweries</h1>
 
-      {/* SEARCH BOX */}
       <input
         type="text"
         placeholder="Search breweries..."
@@ -49,17 +43,11 @@ export default function BreweriesList() {
         onChange={(e) => setSearch(e.target.value)}
       />
 
-      <button onClick={searchBreweries}>
-        Search
-      </button>
-
-      <button onClick={getBreweries}>
-        Reset
-      </button>
+      <button onClick={searchBreweries}>Search</button>
+      <button onClick={getBreweries}>Reset</button>
 
       <hr />
 
-      {/* LIST */}
       {breweries.map((b) => (
         <div
           key={b._id}
@@ -73,9 +61,7 @@ export default function BreweriesList() {
           <p>{b.city}, {b.state}</p>
           <p>Type: {b.brewery_type}</p>
 
-          <Link to={`/vag_breweries/${b._id}`}>
-            View Details
-          </Link>
+          <Link to={`/vag_breweries/${b._id}`}>View Details</Link>
         </div>
       ))}
     </div>

@@ -14,12 +14,10 @@ app.use(express.json());
 
 const port = process.env.PORT || 5000;
 
-// ✅ USE YOUR UCID HERE (vag)
 app.use("/api/v1/vag/breweries", breweriesRoutes);
 
 async function start() {
   try {
-    // ✅ USE ONLY ENV VARIABLE (NO LOCAL FALLBACK)
     const client = new MongoClient(process.env.MONGO_URI);
 
     await client.connect();
