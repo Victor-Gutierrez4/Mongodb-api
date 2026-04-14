@@ -1,3 +1,9 @@
+// Name: Victor Gutierrez
+// Course: IT-302
+// Section: 452
+// Assignment: Phase 4 React Frontend
+// Date: 4/13/26
+// Email: vag@njit.edu
 import BreweriesDAO from "../dao/breweriesDAO.js"
 import mongodb from "mongodb"
 

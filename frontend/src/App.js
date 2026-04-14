@@ -1,3 +1,9 @@
+// Name: Victor Gutierrez
+// Course: IT-302
+// Section: 452
+// Assignment: Phase 4 React Frontend
+// Date: 4/13/26
+// Email: vag@njit.edu
 import React from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import BreweriesList from "./components/BreweriesList";

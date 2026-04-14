@@ -1,3 +1,9 @@
+// Name: Victor Gutierrez
+// Course: IT-302
+// Section: 452
+// Assignment: Phase 4 React Frontend
+// Date: 4/13/26
+// Email: vag@njit.edu
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
