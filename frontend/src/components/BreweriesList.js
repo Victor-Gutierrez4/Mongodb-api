@@ -36,6 +36,7 @@ export default function BreweriesList() {
 
   useEffect(() => {
     getBreweries()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

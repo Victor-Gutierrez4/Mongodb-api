@@ -38,6 +38,7 @@ export default function Brewery({ user }) {
   useEffect(() => {
     getBrewery()
     getComments()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
 
   if (!brewery) {
