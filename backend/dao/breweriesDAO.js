@@ -1,3 +1,10 @@
+// Name: Victor Gutierrez
+// Date: 4/27/26
+// Course: IT-302
+// Section: [452]
+// Assignment: Phase 5 C.U.D. Node.js Data using React.js
+// Email: vag@njit.edu
+
 import { ObjectId } from "mongodb"
 
 let breweries
@@ -9,58 +16,54 @@ export default class BreweriesDAO {
 
     try {
       const db = await conn.db(process.env.DB_NAME)
-
       breweries = await db.collection(process.env.COLLECTION_NAME)
       breweriesComments = await db.collection("comments")
-
-      console.log("Connected to DB:", process.env.DB_NAME)
-      console.log("Using breweries collection:", process.env.COLLECTION_NAME)
     } catch (e) {
       console.error(`Unable to establish collection handles: ${e}`)
     }
   }
 
-  // GET ALL BREWERIES
   static async getBreweries() {
     try {
-      const results = await breweries.find({}).toArray()
-      console.log("Breweries found:", results.length)
-      return results
+      return await breweries.find({}).toArray()
     } catch (e) {
       console.error(`Unable to get breweries: ${e}`)
       return []
     }
   }
 
-  // SEARCH BREWERIES BY NAME
   static async getBreweriesByName(name) {
     try {
-      const results = await breweries.find({
+      return await breweries.find({
         name: { $regex: name, $options: "i" }
       }).toArray()
-
-      console.log(`Search for "${name}" returned:`, results.length)
-      return results
     } catch (e) {
       console.error(`Unable to search breweries: ${e}`)
       return []
     }
   }
 
-  // GET ONE BREWERY BY ID
   static async getBreweryByID(id) {
     try {
-      const brewery = await breweries.findOne({
-        _id: new ObjectId(id)
-      })
-      return brewery
+      return await breweries.findOne({ _id: new ObjectId(id) })
     } catch (e) {
       console.error(`Unable to get brewery by ID: ${e}`)
       return null
     }
   }
 
-  // ADD COMMENT
+  static async getComments(breweryId) {
+    try {
+      return await breweriesComments
+        .find({ breweryId: breweryId })
+        .sort({ lastModified: -1 })
+        .toArray()
+    } catch (e) {
+      console.error(`Unable to get comments: ${e}`)
+      return []
+    }
+  }
+
   static async addComment(breweryId, text, userName, userId, date) {
     try {
       const commentDoc = {
@@ -78,11 +81,10 @@ export default class BreweriesDAO {
     }
   }
 
-  // UPDATE COMMENT
   static async updateComment(commentId, userId, text, date) {
     try {
       return await breweriesComments.updateOne(
-        { _id: new ObjectId(commentId), userId: userId },
+        { _id: commentId, userId: userId },
         { $set: { text: text, lastModified: date } }
       )
     } catch (e) {
@@ -91,11 +93,10 @@ export default class BreweriesDAO {
     }
   }
 
-  // DELETE COMMENT
   static async deleteComment(commentId, userId) {
     try {
       return await breweriesComments.deleteOne({
-        _id: new ObjectId(commentId),
+        _id: commentId,
         userId: userId
       })
     } catch (e) {

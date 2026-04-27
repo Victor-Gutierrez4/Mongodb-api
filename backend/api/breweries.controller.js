@@ -1,15 +1,14 @@
 // Name: Victor Gutierrez
+// Date: 4/27/26
 // Course: IT-302
-// Section: 452
-// Assignment: Phase 4 React Frontend
-// Date: 4/13/26
+// Section: [452]
+// Assignment: Phase 5 C.U.D. Node.js Data using React.js
 // Email: vag@njit.edu
+
 import BreweriesDAO from "../dao/breweriesDAO.js"
 import mongodb from "mongodb"
 
 export default class BreweriesController {
-
-  // ✅ GET ALL + SEARCH
   static async apiGetBreweries(req, res) {
     try {
       const name = req.query.name
@@ -27,21 +26,23 @@ export default class BreweriesController {
     }
   }
 
-  // ✅ GET ONE BY ID
   static async apiGetBreweryById(req, res) {
     try {
-      const breweryId = req.params.id
-      const brewery = await BreweriesDAO.getBreweryByID(breweryId)
-
+      const brewery = await BreweriesDAO.getBreweryByID(req.params.id)
       res.json(brewery)
     } catch (e) {
       res.status(500).json({ error: e.message })
     }
   }
 
-  // =========================
-  // COMMENTS (your original code)
-  // =========================
+  static async apiGetComments(req, res) {
+    try {
+      const comments = await BreweriesDAO.getComments(req.params.breweryId)
+      res.json(comments)
+    } catch (e) {
+      res.status(500).json({ error: e.message })
+    }
+  }
 
   static async apiPostComment(req, res) {
     try {

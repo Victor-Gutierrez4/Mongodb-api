@@ -1,63 +1,111 @@
 // Name: Victor Gutierrez
+// Date: 4/27/26
 // Course: IT-302
-// Section: 452
-// Assignment: Phase 4 React Frontend
-// Date: 4/13/26
+// Section: [452]
+// Assignment: Phase 5 C.U.D. Node.js Data using React.js
 // Email: vag@njit.edu
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useParams, Link } from "react-router-dom";
 
-export default function Brewery() {
-  const { id } = useParams();
-  const [brewery, setBrewery] = useState(null);
+import React, { useEffect, useState } from "react"
+import { Link, useParams } from "react-router-dom"
+import BreweriesDataService from "../services/BreweriesDataService"
 
-  const backendUrl =
-    process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+export default function Brewery({ user }) {
+  const { id } = useParams()
+  const [brewery, setBrewery] = useState(null)
+  const [comments, setComments] = useState([])
+
+  const getBrewery = () => {
+    BreweriesDataService.get(id)
+      .then((res) => setBrewery(res.data))
+      .catch((err) => console.log(err))
+  }
+
+  const getComments = () => {
+    BreweriesDataService.getComments(id)
+      .then((res) => setComments(res.data))
+      .catch((err) => console.log(err))
+  }
+
+  const deleteComment = (commentId) => {
+    BreweriesDataService.deleteComment({
+      commentId: commentId,
+      userId: user.id
+    })
+      .then(() => getComments())
+      .catch((err) => console.log(err))
+  }
 
   useEffect(() => {
-    const getBrewery = async () => {
-      try {
-        const res = await axios.get(
-          `${backendUrl}/api/v1/vag/breweries/id/${id}`
-        );
-        setBrewery(res.data);
-      } catch (err) {
-        console.log("DETAIL ERROR:", err);
-      }
-    };
-
-    getBrewery();
-  }, [id, backendUrl]);
+    getBrewery()
+    getComments()
+  }, [id])
 
   if (!brewery) {
-    return <p style={{ padding: "20px" }}>Loading...</p>;
+    return <p style={{ padding: "20px" }}>Loading...</p>
   }
+
+  const userComment = user
+    ? comments.find((comment) => comment.userId === user.id)
+    : null
 
   return (
     <div style={{ padding: "20px" }}>
       <h1>{brewery.name}</h1>
-      <p>
-        <strong>Type:</strong> {brewery.brewery_type}
-      </p>
-      <p>
-        <strong>City:</strong> {brewery.city}
-      </p>
-      <p>
-        <strong>State:</strong> {brewery.state}
-      </p>
 
       {brewery.image && (
         <img
           src={brewery.image}
           alt={brewery.name}
-          style={{ maxWidth: "400px", width: "100%", marginTop: "10px" }}
+          style={{ maxWidth: "400px", width: "100%" }}
         />
       )}
 
-      <div style={{ marginTop: "20px" }}>
-        <Link to="/vag_breweries">Back to Breweries</Link>
-      </div>
+      <p><strong>Type:</strong> {brewery.brewery_type}</p>
+      <p><strong>City:</strong> {brewery.city}</p>
+      <p><strong>State:</strong> {brewery.state}</p>
+
+      <hr />
+
+      <h2>Comments</h2>
+
+      {user ? (
+        <Link to={`/vag_breweries/${id}/comment`}>
+          {userComment ? "Edit Comment" : "Add Comment"}
+        </Link>
+      ) : (
+        <p>
+          <Link to="/vag_login">Login</Link> to add a comment.
+        </p>
+      )}
+
+      {comments.length === 0 ? (
+        <p>No comments yet.</p>
+      ) : (
+        comments.map((comment) => (
+          <div
+            key={comment._id}
+            style={{
+              border: "1px solid #ccc",
+              padding: "10px",
+              marginTop: "10px"
+            }}
+          >
+            <p>{comment.text}</p>
+            <p>
+              <strong>By:</strong> {comment.userName}
+            </p>
+
+            {user && user.id === comment.userId && (
+              <button onClick={() => deleteComment(comment._id)}>
+                Delete Comment
+              </button>
+            )}
+          </div>
+        ))
+      )}
+
+      <br />
+      <Link to="/vag_breweries">Back to Breweries</Link>
     </div>
-  );
+  )
 }
