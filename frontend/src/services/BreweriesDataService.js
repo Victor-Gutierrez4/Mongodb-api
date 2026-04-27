@@ -41,4 +41,5 @@ class BreweriesDataService {
   }
 }
 
-export default new BreweriesDataService()
+const breweriesDataService = new BreweriesDataService()
+export default breweriesDataService
